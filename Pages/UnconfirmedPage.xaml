@@ -1,0 +1,114 @@
+<Page x:Class="InternalBaseWpf.Pages.UnconfirmedPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d"
+      d:DesignHeight="700" d:DesignWidth="1200"
+      Title="Неподтвержденные"
+      Loaded="Page_Loaded">
+
+    <Grid Background="{StaticResource MainBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Неподтвержденные" FontSize="20" Margin="20,20,20,10" />
+
+        <Border Grid.Row="1" Background="White" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1" Margin="20,0,20,10" Padding="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBox x:Name="txtSearch" Width="250" materialDesign:HintAssist.Hint="ФИО/телефон" VerticalAlignment="Center" TextChanged="TxtSearch_TextChanged" Margin="0,0,10,0" />
+                    <ComboBox x:Name="cmbMainCell" Width="180" materialDesign:HintAssist.Hint="Основная ячейка" VerticalAlignment="Center" SelectionChanged="Filter_Changed" Margin="0,0,10,0" />
+                    <ComboBox x:Name="cmbCellFilter" Width="180" materialDesign:HintAssist.Hint="Фильтр по участию в ячейках" VerticalAlignment="Center" SelectionChanged="Filter_Changed" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button x:Name="btnTemplate" Click="BtnTemplate_Click" Margin="5,0" Style="{StaticResource MaterialDesignFlatButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="FileExcel" VerticalAlignment="Center" Margin="0,0,5,0" />
+                            <TextBlock Text="ОТКРЫТЬ ШАБЛОН" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnImport" Click="BtnImport_Click" Margin="5,0" Style="{StaticResource MaterialDesignFlatButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="FileImport" VerticalAlignment="Center" Margin="0,0,5,0" />
+                            <TextBlock Text="ИМПОРТ" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="btnEdit" Click="BtnEdit_Click" Margin="5,0" ToolTip="Изменить" Style="{StaticResource MaterialDesignFlatButton}">
+                        <materialDesign:PackIcon Kind="Pencil" Width="22" Height="22" />
+                    </Button>
+                    <Button x:Name="btnConfirm" Click="BtnConfirm_Click" Margin="5,0" ToolTip="Подтвердить" Style="{StaticResource MaterialDesignFlatButton}">
+                        <materialDesign:PackIcon Kind="Check" Width="22" Height="22" />
+                    </Button>
+                    <Button x:Name="btnDelete" Click="BtnDelete_Click" Margin="5,0" ToolTip="Удалить" Style="{StaticResource MaterialDesignFlatButton}">
+                        <materialDesign:PackIcon Kind="Delete" Width="22" Height="22" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="2" Margin="20,0,20,10" Background="White" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+            <DataGrid x:Name="dgUnconfirmed"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      SelectionMode="Single"
+                      CanUserReorderColumns="True"
+                      CanUserResizeColumns="True"
+                      HorizontalAlignment="Stretch"
+                      HorizontalContentAlignment="Stretch"
+                      ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      GridLinesVisibility="Horizontal">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="colImportStatus" Header="Готовность к импорту" Binding="{Binding ImportStatus}" Width="Auto" MinWidth="180" />
+                    <DataGridTextColumn x:Name="colLocalBranch" Header="Местное отделение" Binding="{Binding LocalBranch}" Width="*" MinWidth="200" />
+                    <DataGridTextColumn x:Name="colFullName" Header="ФИО" Binding="{Binding FullName}" Width="*" MinWidth="150" />
+                    <DataGridTextColumn x:Name="colBirthDate" Header="Дата рождения" Binding="{Binding BirthDateText}" Width="Auto" MinWidth="110" />
+                    <DataGridTextColumn x:Name="colEmail" Header="E-mail" Binding="{Binding Email}" Width="Auto" MinWidth="150" />
+                    <DataGridTextColumn x:Name="colPhone" Header="Моб. телефон" Binding="{Binding Phone}" Width="Auto" MinWidth="120" />
+                    <DataGridTextColumn x:Name="colAddress" Header="Адрес" Binding="{Binding Address}" Width="*" MinWidth="200" />
+                    <DataGridTextColumn x:Name="colNote" Header="Примечание" Binding="{Binding Note}" Width="*" MinWidth="150" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <Grid Grid.Row="3" Margin="20,0,20,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="Строк на странице:" VerticalAlignment="Center" Margin="0,0,5,0" />
+                <ComboBox x:Name="cmbPageSize" Width="40" SelectedIndex="0" SelectionChanged="CmbPageSize_SelectionChanged">
+                    <ComboBoxItem>25</ComboBoxItem>
+                    <ComboBoxItem>50</ComboBoxItem>
+                    <ComboBoxItem>100</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+
+            <TextBlock Grid.Column="1" x:Name="txtStatus" Text="Загрузка..." HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button x:Name="btnFirst" Content="|&lt;" Click="BtnPage_Click" Tag="First" Margin="2,0" Foreground="White"/>
+                <Button x:Name="btnPrev" Content="&lt;" Click="BtnPage_Click" Tag="Prev" Margin="2,0" Foreground="White"/>
+                <TextBlock x:Name="txtPageInfo" Text="1" VerticalAlignment="Center" Margin="5,0" />
+                <Button x:Name="btnNext" Content=">" Click="BtnPage_Click" Tag="Next" Margin="2,0" Foreground="White"/>
+                <Button x:Name="btnLast" Content=">|" Click="BtnPage_Click" Tag="Last" Margin="2,0" Foreground="White"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

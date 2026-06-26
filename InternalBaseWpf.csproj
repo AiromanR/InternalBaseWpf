@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\cog.ico" />
+    <Resource Include="Images\filter.ico" />
+    <Resource Include="Images\key.ico" />
+    <Resource Include="Images\logo.png" />
+    <Resource Include="Images\pencil.ico" />
+    <Resource Include="Images\plus.ico" />
+    <Resource Include="Images\userlist.png" />
+    <Content Include="Templates\*.*" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Images\cog.ico" />
+    <None Remove="Images\filter.ico" />
+    <None Remove="Images\key.ico" />
+    <None Remove="Images\pencil.ico" />
+    <None Remove="Images\plus.ico" />
+    <None Remove="Images\userlist.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.2.1" />
+    <PackageReference Include="MaterialDesignThemes" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

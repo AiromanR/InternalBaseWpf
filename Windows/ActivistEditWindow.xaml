@@ -1,0 +1,85 @@
+<Window x:Class="InternalBaseWpf.Windows.ActivistEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Правка" Height="700" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Images/pencil.ico"
+        ResizeMode="CanResize">
+
+    <Grid Background="{StaticResource MainBackground}">
+        <Border Background="White" CornerRadius="4" Margin="20" Padding="25">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="ПРАВКА" FontSize="18" FontWeight="Bold" Foreground="{StaticResource PrimaryBlue}" Margin="0,0,0,20" />
+
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBox Grid.Row="0" Grid.Column="0" x:Name="txtLastName" materialDesign:HintAssist.Hint="Фамилия" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,0,10,12" />
+                        <TextBox Grid.Row="1" Grid.Column="0" x:Name="txtFirstName" materialDesign:HintAssist.Hint="Имя" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,0,10,12" />
+                        <TextBox Grid.Row="2" Grid.Column="0" x:Name="txtPatronymic" materialDesign:HintAssist.Hint="Отчество" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,0,10,12" />
+                        <ComboBox Grid.Row="3" Grid.Column="0" x:Name="cmbGender" materialDesign:HintAssist.Hint="Пол" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="0,0,10,12" />
+                        <DatePicker Grid.Row="4" Grid.Column="0" x:Name="dpBirthDate" materialDesign:HintAssist.Hint="Дата рождения" Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="0,0,10,12" />
+                        <TextBox Grid.Row="5" Grid.Column="0" x:Name="txtPhone" materialDesign:HintAssist.Hint="Моб. телефон" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,0,10,12" />
+                        <TextBox Grid.Row="6" Grid.Column="0" x:Name="txtAddress" materialDesign:HintAssist.Hint="Адрес" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" AcceptsReturn="True" MinHeight="60" Margin="0,0,10,12" />
+                        <TextBox Grid.Row="7" Grid.Column="0" x:Name="txtLocalBranch" materialDesign:HintAssist.Hint="Местное отделение" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,0,10,12" />
+                        <TextBox Grid.Row="8" Grid.Column="0" x:Name="txtPrimaryBranch" materialDesign:HintAssist.Hint="Первичное отделение" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,0,10,12" />
+                        <TextBox Grid.Row="9" Grid.Column="0" x:Name="txtUikNumber" materialDesign:HintAssist.Hint="УИК №" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="0,0,10,12" />
+
+                        <CheckBox Grid.Row="10" Grid.Column="0" x:Name="chkIsAts" Content="АЦ" Margin="0,5,10,5" Style="{StaticResource MaterialDesignFilterChipPrimaryCheckBox}"/>
+                        <CheckBox Grid.Row="10" Grid.Column="0" x:Name="chkIsVverh" Content="ВВЕРХ" Margin="80,5,10,5" Style="{StaticResource MaterialDesignFilterChipPrimaryCheckBox}"/>
+
+                        <CheckBox Grid.Row="0" Grid.Column="1" x:Name="chkIsResponsible" Content="Ответственный" Margin="10,5,0,10" FontSize="14" Style="{StaticResource MaterialDesignFilterChipPrimaryCheckBox}"/>
+                        <CheckBox Grid.Row="1" Grid.Column="1" x:Name="chkCanEdit" Content="С правом на редактирование" Margin="10,5,0,10" Style="{StaticResource MaterialDesignFilterChipPrimaryCheckBox}" />
+                        <ComboBox Grid.Row="2" Grid.Column="1" x:Name="cmbResponsibleUser" materialDesign:HintAssist.Hint="ФИО ответственного" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="FullName" SelectedValuePath="Id" Margin="10,0,0,12" />
+                        <ComboBox Grid.Row="3" Grid.Column="1" x:Name="cmbMainCell" materialDesign:HintAssist.Hint="Основная ячейка" Style="{StaticResource MaterialDesignOutlinedComboBox}" DisplayMemberPath="Name" SelectedValuePath="Id" Margin="10,0,0,12" />
+                        <ComboBox Grid.Row="4" Grid.Column="1" x:Name="cmbPartyStatus" materialDesign:HintAssist.Hint="Парт. статус" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="10,0,0,12" />
+                        <ComboBox Grid.Row="5" Grid.Column="1" x:Name="cmbOrgStatus" materialDesign:HintAssist.Hint="Орг. статус" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="10,0,0,12" />
+                        <TextBox Grid.Row="6" Grid.Column="1" x:Name="txtWorkplace" materialDesign:HintAssist.Hint="Место работы" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="10,0,0,12" />
+                        <TextBox Grid.Row="7" Grid.Column="1" x:Name="txtPosition" materialDesign:HintAssist.Hint="Должность" Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="10,0,0,12" />
+                        <TextBox Grid.Row="8" Grid.Column="1" x:Name="txtNote" materialDesign:HintAssist.Hint="Примечание" Style="{StaticResource MaterialDesignOutlinedTextBox}" TextWrapping="Wrap" AcceptsReturn="True" MinHeight="60" Margin="10,0,0,12" />
+
+                        <StackPanel Grid.Row="9" Grid.Column="1" Margin="10,5,0,5">
+                            <CheckBox x:Name="chkPartySupporter" Content="Член профсоюза" Style="{StaticResource MaterialDesignFilterChipPrimaryCheckBox}"/>
+                            <CheckBox x:Name="chkPresidentSupporter" Content="Волонтёр" Style="{StaticResource MaterialDesignFilterChipPrimaryCheckBox}"/>
+                            <CheckBox x:Name="chkVdlSupporter" Content="Участник волонтёрской программы" Style="{StaticResource MaterialDesignFilterChipPrimaryCheckBox}"/>
+                        </StackPanel>
+
+                        <ComboBox Grid.Row="10" Grid.Column="1" x:Name="cmbLoyalty" materialDesign:HintAssist.Hint="Лояльность" Style="{StaticResource MaterialDesignOutlinedComboBox}" Margin="10,0,0,12" />
+                    </Grid>
+                </ScrollViewer>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                    <Button Content="ОТМЕНА" Style="{StaticResource MaterialDesignFlatButton}" Foreground="{StaticResource ErrorBrush}" Click="BtnCancel_Click" Margin="0,0,15,0" />
+                    <Button Content="СОХРАНИТЬ" Style="{StaticResource MaterialDesignRaisedButton}" Background="{StaticResource PrimaryBlue}" Foreground="White" Width="150" Click="BtnSave_Click" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
